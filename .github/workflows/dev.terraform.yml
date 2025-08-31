@@ -27,7 +27,7 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     environment:
-      name: ${{ github.ref == 'refs/heads/develop' && 'dev' || 'prod' }}
+      name: dev
     defaults:
       run:
         working-directory: ./terraform
@@ -102,7 +102,7 @@ jobs:
         run: exit 1
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
         run: terraform apply -auto-approve -var-file=variables/${{ vars.ENV }}.tfvars -input=false
         env:
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
