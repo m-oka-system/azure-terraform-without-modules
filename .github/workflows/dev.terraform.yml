@@ -92,9 +92,9 @@ jobs:
         run: terraform plan -var-file=variables/${{ vars.ENV }}.tfvars -no-color -input=false
         continue-on-error: true
         env:
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_CLIENT_ID: ${{ secrets.BACKEND_AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.BACKEND_AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.BACKEND_AZURE_SUBSCRIPTION_ID }}
           ARM_USE_OIDC: true
 
       - name: Terraform Plan Status
@@ -105,9 +105,9 @@ jobs:
         if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
         run: terraform apply -auto-approve -var-file=variables/${{ vars.ENV }}.tfvars -input=false
         env:
-          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          ARM_CLIENT_ID: ${{ secrets.BACKEND_AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.BACKEND_AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.BACKEND_AZURE_SUBSCRIPTION_ID }}
           ARM_USE_OIDC: true
 
       - name: Remove runner's Public IP from KeyVault Firewall
