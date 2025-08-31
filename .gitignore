@@ -40,3 +40,4 @@ CLAUDE.md
 # Github Actions
 !.github/workflows/
 !.github/workflows/*.yml
+*.secrets*
